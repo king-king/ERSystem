@@ -5,13 +5,12 @@
 var http = require( "http" );
 var fs = require( "fs" );
 
-var maxCacheLen = 3;
+var maxCacheLen = 10;
 global.fileHandlers = [];
 
 var c = 0;
 
 http.createServer( function ( req, res ) {
-    console.log( fileHandlers.length );
     var item = {};
     item.origin = req.headers.origin;
     item.userAgent = req.headers["user-agent"];
