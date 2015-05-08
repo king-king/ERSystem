@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    (function () {
+
+        var xhr = new XMLHttpRequest();
+        xhr.open( "post", "http://localhost:8282", true );
+
+        var a = {
+            project : "hu",
+            text : "image 404"
+        };
+
+        xhr.send( JSON.stringify( a ) );
+        xhr.onreadystatechange = function () {
+            if ( xhr.readyState == 4 ) {
+                console.log( xhr.response );
+            }
+        }
+
+
+    })();
+</script>
+</body>
+</html>
