@@ -9,11 +9,11 @@
     (function () {
 
         var xhr = new XMLHttpRequest();
-        xhr.open( "post", "http://localhost:8282/logdown", true );
+        xhr.open( "post", "http://localhost:8181/insert", true );
 
         var a = {
-            project : "hongjiu",
-            text : "image 404"
+            project : "jd",
+            err : "image 404"
         };
 
         xhr.send( JSON.stringify( a ) );
