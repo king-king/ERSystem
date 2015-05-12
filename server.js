@@ -8,7 +8,6 @@ var fs = require( "fs" );
 var maxCacheLen = 10;
 global.fileHandlers = [];
 
-var c = 0;
 
 http.createServer( function ( req, res ) {
 
