@@ -59,6 +59,8 @@ MongoClient.connect( dbUrl, function ( err, db ) {
                     data = JSON.parse( data );
                     doc.err = data.err;
                     doc.mark = data.mark || "";
+                    doc.version = data.version || "0";
+                    doc.solve = false;
                     if ( !data.project || !data.err ) {
                         // 如果没有没有必选的数据，则不进行处理，直接返回400
                         res.write( JSON.stringify( {
