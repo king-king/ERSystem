@@ -11,25 +11,25 @@ doc={
     err:[String ],//错误描述
     mark:[String ],//备注
     version:[String ],//代码的版本
-    solve:[Boolean ]// 改错误是否被解决
+    solve:[Boolean ]// 该错误是否被解决
 }
 
 ```
 
-## 怎么记录？
 
-### 记录错误的接口是：
-/insert
+### 都有什么接口？
 
-### 发送ajax，post方法。发送的数据中要包含以下几个字段：
+1. "/insert" [post] 插入一条错误记录
 
-+ project：项目名称，查看统计结果的时候默认是按照项目名称进行分类的（必填）
-
-+ err:错误描述（必填）
- 
-+ mark:可以添加一段备注（可选）
-
-
+    需要包含的数据内容
+    ```javascript
+        sendData={
+            project：[string] [必填],//项目名称 系统会为每个项目单独设置一个集合
+            err：[string] [必填],//错误描述
+            version:[number][必填],//代码版本，是一个正整数，可以据此排除用户缓存等问题
+            mark：[string] [可选]//错误描述
+        }
+    ```
 ## 基本需求
 + 查询所有的未处理错误（显示名称、）
 
