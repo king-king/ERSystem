@@ -3,7 +3,11 @@
  */
 
 var MongoClient = require( 'mongodb' ).MongoClient,
-    http = require( "http" );
+    http = require( "http" ),
+    lookMime = require( "mime" ).look,
+    url = require( "url" ),
+    fs = require( "fs" ),
+    pt = require( "path" );
 
 
 var dbUrl = 'mongodb://localhost:27017/errlog',
@@ -14,7 +18,30 @@ MongoClient.connect( dbUrl, function ( err, db ) {
         database = db;
         // 开启http服务器
         http.createServer( function ( req, res ) {
-            if ( req.url == "/insert" ) {
+            var path = url.parse( req.url ).pathname;
+            var extName = pt.extname( path );
+            var mimeType = lookMime( extName );
+            if ( extName ) {
+                //  按照文件处理
+                fs.exists( "view" + path, function ( is ) {
+                    if ( is ) {
+                        res.writeHead( 200, {
+                            'Content-Type' : mimeType
+                        } );
+                        var rs = fs.createReadStream( "view" + path );
+                        rs.pipe( res );
+                        rs.on( "end", function () {
+                            res.end();
+                        } );
+                    }
+                    else {
+                        res.writeHead( 404 );
+                        res.end();
+                    }
+                } );
+            }
+
+            else if ( req.url == "/insert" ) {
                 res.writeHead( 200, {
                     'Content-Type' : 'application/json; charset=utf-8',
                     "Access-Control-Allow-Origin" : "*"
@@ -62,9 +89,15 @@ MongoClient.connect( dbUrl, function ( err, db ) {
                 } );
             }
 
+            else {
+                // 不能处理的url都按照400处理
+                res.writeHead( 400 );
+                res.end();
+            }
         } ).listen( 8181, "127.0.0.1" );
     }
     else {
+        console.log( "mongodb服务器链接失败，http服务器已经关闭" );
         // 1min后退出程序，由父进程监听到exit事件后重启
         setTimeout( function () {
             process.exit();
