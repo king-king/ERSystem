@@ -11,3 +11,8 @@ httpServer.on( "exit", function () {
         httpServer = child_process.fork( "server-worker.js" )
     }, 1000 * 60 );
 } );
+
+process.on( "exit", function () {
+    // 父进程退出自动关闭子进程
+    httpServer && httpServer.kill();
+} );
