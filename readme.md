@@ -19,7 +19,7 @@ doc={
 
 ### 都有什么接口？
 
-1. "/insert" [post] 插入一条错误记录
++ "/insert" [post] 插入一条错误记录
 
     需要包含的数据内容
     ```javascript
