@@ -9,7 +9,7 @@
 doc={
     origin:[String ],// 访问者的地址
     userAgent:[String ],//浏览器的代理
-    date:[Date ],// 记录的时间
+    date:[Date ],// 报错的的时间
     err:[String ],//错误描述
     mark:[String ],//备注
     version:[Number ],//代码的版本
