@@ -42,7 +42,7 @@ doc={
      ```javascript
         {
             "code": 200,
-            "result": [
+            "result": \[
                 {
                     "_id": "undefined is not a function",
                     "count": 6
@@ -55,7 +55,7 @@ doc={
                     "_id": "timout",
                     "count": 3
                 }
-            ]
+            \]
         }
             
         ```
