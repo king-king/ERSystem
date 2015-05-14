@@ -153,7 +153,7 @@ MongoClient.connect( dbUrl, function ( err, db ) {
                 res.writeHead( 400 );
                 res.end();
             }
-        } ).listen( 8181, "127.0.0.1" );
+        } ).listen( 8383 );
     }
     else {
         console.log( "mongodb服务器链接失败，http服务器已经关闭" );

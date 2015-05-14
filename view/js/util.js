@@ -41,12 +41,19 @@
         this.style.setProperty( "-webkit-transform", "translate3d(" + x + "px," + y + "px,0)", null );
     };
 
+    Node.prototype.remove = function () {
+        this.parentNode.removeChild( this );
+    };
+
     function element( tag, arg, parent ) {
         var t = document.createElement( tag );
         for ( var key in arg ) {
             switch ( key ) {
                 case "classList" :
                     t.classList.add( arg[key] );
+                    break;
+                default :
+                    t[key] = arg[key];
             }
         }
         parent && parent.appendChild( t );

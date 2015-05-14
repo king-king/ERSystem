@@ -14,6 +14,19 @@ html, body {
     overflow: hidden;
 }
 
+.hide {
+    display: none !important;
+}
+
+.loading {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+}
+
 .project-list-border, .detail-list-border {
     position: absolute;
     height: 100%;
@@ -22,7 +35,7 @@ html, body {
 .project-list-border {
     overflow-y: auto;
     width: 20%;
-    border-right: 2px solid #a1a1a1;
+    border-right: 3px solid #a1a1a1;
     top: 0;
     left: 0;
 }
@@ -32,4 +45,85 @@ html, body {
     width: 80%;
     top: 0;
     right: 0;
+}
+
+.project-list-border .project-list-item {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    cursor: pointer;
+    color: darkolivegreen;
+    font-size: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.project-list-border .project-list-item.select {
+    background: orange;
+}
+
+.project-list-border .project-list-item:hover {
+    background: #e1e1e1;
+}
+
+.project-list-border-title {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: darkolivegreen;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid rgba(85, 107, 47, 0.1);
+}
+
+.detail-list-border-title {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: #DF6326;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    /*border-bottom: 2px solid rgba(223, 99, 38, 0.1);*/
+}
+
+.detail-content {
+    position: absolute;
+    top: 10%;
+    height: 90%;
+    left: 10%;
+    width: 80%;
+}
+
+.detail-list-item {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    cursor: pointer;
+    color: #FD5340;
+    font-size: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.detail-list-item:hover {
+    background: #f1f1f1;
+}
+
+.detail-list-item .text {
+    width: 90%;
+    display: inline-block;
+    overflow: hidden;
+    float: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.detail-list-item .count {
+    width: 10%;
+    display: inline-block;
+    float: left;
 }
