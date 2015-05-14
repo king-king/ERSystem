@@ -38,11 +38,11 @@ doc={
 + "/getUnsolvedErr?project=projectName" [get] 得到项目projectName的所有未解决err
 
     返回的数据结构：
-    
+                     
      ```javascript
         {
             "code": 200,
-            "result": \[
+            "result": [
                 {
                     "_id": "undefined is not a function",
                     "count": 6
@@ -55,7 +55,7 @@ doc={
                     "_id": "timout",
                     "count": 3
                 }
-            \]
+            ]
         }
             
         ```
