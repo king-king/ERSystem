@@ -33,9 +33,9 @@ doc={
         }
         
     ```
-+ "getProjects"[get] 得到全部的项目名称
++ "getProjects" [get] 得到全部的项目名称
 
-+ "/getUnsolvedErr?project=projectName"[get] 得到项目projectName的所有未解决err
++ "/getUnsolvedErr?project=projectName" [get] 得到项目projectName的所有未解决err
 
     返回的数据结构：
     
