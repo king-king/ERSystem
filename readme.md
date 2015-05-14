@@ -40,23 +40,23 @@ doc={
     返回的数据结构：
     
      ```javascript
-            {
-                "code": 200,
-                "result": [
-                    {
-                        "_id": "undefined is not a function",
-                        "count": 6
-                    },
-                    {
-                        "_id": "image 404",
-                        "count": 4
-                    },
-                    {
-                        "_id": "timout",
-                        "count": 3
-                    }
-                ]
-            }
+        {
+            "code": 200,
+            "result": [
+                {
+                    "_id": "undefined is not a function",
+                    "count": 6
+                },
+                {
+                    "_id": "image 404",
+                    "count": 4
+                },
+                {
+                    "_id": "timout",
+                    "count": 3
+                }
+            ]
+        }
             
         ```
     需要特别注意的是，某些浏览器显示数据的时候会错误的把_id写作id，写成id是取不到数据的。
