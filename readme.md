@@ -22,7 +22,7 @@ doc={
 ## 都有什么接口？
 
 + "/insert" [post] 插入一条错误记录
-    ### 需要发送的数据内容：
+##### 需要发送的数据内容：
     ```javascript
         sendData={
             project：[String] [必填],//项目名称 系统会为每个项目单独设置一个集合
@@ -35,7 +35,7 @@ doc={
 + "getProjects" [get] 得到全部的项目名称
 
 + "/getUnsolvedErr?project=projectName" [get] 得到项目projectName的所有未解决err
-    ### 返回的数据结构：
+##### 返回的数据结构：
      ```javascript
         {
             "code": 200,
@@ -60,7 +60,7 @@ doc={
 需要特别注意的是，某些浏览器显示数据的时候会错误的把_id写作id，写成id是取不到数据的。
 
 + "/getProjectList" [post] 得到所有的项目
-### 返回的数据结构：
+##### 返回的数据结构：
      ```javascript
         {
             "code": 200,
