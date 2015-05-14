@@ -93,6 +93,29 @@ MongoClient.connect( dbUrl, function ( err, db ) {
                 } );
             }
 
+            // 得到所有集合
+            else if ( req.url == "/getProjectList" ) {
+                res.writeHead( 200, {
+                    'Content-Type' : 'application/json; charset=utf-8',
+                    "Access-Control-Allow-Origin" : "*"
+                } );
+                query.getCollectionList( db, function ( err, projectList ) {
+                    if ( err ) {
+                        res.write( JSON.stringify( {
+                            code : 500,
+                            result : err
+                        } ) );
+                    }
+                    else {
+                        res.write( JSON.stringify( {
+                            code : 200,
+                            result : projectList
+                        } ) );
+                    }
+                    res.end();
+                } )
+            }
+
             //得到某个项目的所有未解决错误
             else if ( /^\/getUnsolvedErr\?/.test( req.url ) ) {
                 var projectName = url.parse( req.url, true ).query.project;
@@ -104,7 +127,7 @@ MongoClient.connect( dbUrl, function ( err, db ) {
                     query.findAllUnsolvedErr( db, projectName, function ( err, result ) {
                         if ( err ) {
                             res.write( JSON.stringify( {
-                                code : 200,
+                                code : 500,
                                 result : err
                             } ) );
                         }
@@ -123,7 +146,6 @@ MongoClient.connect( dbUrl, function ( err, db ) {
                     res.writeHead( 400 );
                     res.end();
                 }
-
             }
 
             else {

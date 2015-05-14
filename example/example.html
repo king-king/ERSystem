@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    (function () {
+
+        // 得到项目列表
+        function getProjectList() {
+            var xhr = new XMLHttpRequest();
+            xhr.open( "get", "http://localhost:8181/getProjectList", true );
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if ( xhr.readyState == 4 ) {
+                    var data = JSON.parse( xhr.responseText );
+                    console.log( xhr.responseText, data );
+                }
+            };
+        }
+
+        getProjectList();
+
+        // 得到某个项目的未解决err
+//        var xhr = new XMLHttpRequest();
+//        xhr.open( "get", "http://localhost:8181/getUnsolvedErr?project=chuye", true );
+//        xhr.send();
+//        xhr.onreadystatechange = function () {
+//            if ( xhr.readyState == 4 ) {
+//                var data = JSON.parse( xhr.responseText );
+//                console.dir( xhr.responseText );
+//            }
+//        }
+
+
+    })();
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-<img src="zach.gif">
+<img src="src/zach.gif">
 使用说明
 =========
 
@@ -62,4 +62,5 @@ doc={
   
 需要特别注意的是，某些浏览器显示数据的时候会错误的把_id写作id，写成id是取不到数据的。
 
++ "/getProjectList" [post] 得到所有的项目
 

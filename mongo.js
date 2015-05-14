@@ -12,17 +12,22 @@ MongoClient.connect( url, function ( err, db ) {
     console.log( "Connected correctly to server" );
     //var student = db.collection( "student2" );
 
-    console.log( "hello" );
-
-    query( db, "chuye", function ( err, result ) {
-        if ( err ) {
-            console.log( err );
-        }
-        else {
-            console.log( result )
-        }
+    db.collections( function ( err, collections ) {
+        console.log( collections );
         db.close();
     } );
+
+    //console.log( "hello" );
+    //
+    //query( db, "chuye", function ( err, result ) {
+    //    if ( err ) {
+    //        console.log( err );
+    //    }
+    //    else {
+    //        console.log( result )
+    //    }
+    //    db.close();
+    //} );
 
 
     // 查询
