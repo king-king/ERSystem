@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .item {
+            width: 100px;
+            height: 50px;
+            background: red;
+            border-radius: 4px;
+        }
+
+        .tip {
+            height: 200px;
+            width: 50px;
+            background: rgba(0, 255, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="item"></div>
+<script>
+
+
+    Node.prototype.position = function ( x, y ) {
+        this.style.setProperty( "-webkit-transform", "translate3d(" + x + "px," + y + "px,0)", null );
+    };
+
+    function element( tag, arg, parent ) {
+        var t = document.createElement( tag );
+        for ( var key in arg ) {
+            switch ( key ) {
+                case "classList" :
+                    t.classList.add( arg[key] );
+            }
+        }
+        parent && parent.appendChild( t );
+        return t;
+    }
+
+    document.querySelector( ".item" ).oncontextmenu = function ( e ) {
+        console.log( "right", e.pageX );
+        var tip = element( "div", {
+            classList : "tip"
+        }, document.body );
+        tip.position( e.pageX, e.pageY );
+        return false;
+    }
+</script>
+</body>
+</html>

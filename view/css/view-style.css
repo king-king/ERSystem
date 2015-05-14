@@ -1,0 +1,35 @@
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-user-select: none;
+    font-family: "Microsoft Yahei";
+}
+
+html, body {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.project-list-border, .detail-list-border {
+    position: absolute;
+    height: 100%;
+}
+
+.project-list-border {
+    overflow-y: auto;
+    width: 20%;
+    border-right: 2px solid #a1a1a1;
+    top: 0;
+    left: 0;
+}
+
+.detail-list-border {
+    overflow-y: auto;
+    width: 80%;
+    top: 0;
+    right: 0;
+}
