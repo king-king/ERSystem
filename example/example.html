@@ -21,18 +21,35 @@
             };
         }
 
-        getProjectList();
-
         // 得到某个项目的未解决err
-//        var xhr = new XMLHttpRequest();
-//        xhr.open( "get", "http://localhost:8181/getUnsolvedErr?project=chuye", true );
-//        xhr.send();
-//        xhr.onreadystatechange = function () {
-//            if ( xhr.readyState == 4 ) {
-//                var data = JSON.parse( xhr.responseText );
-//                console.dir( xhr.responseText );
-//            }
-//        }
+        function getUnsolvedErr() {
+            var xhr = new XMLHttpRequest();
+            xhr.open( "get", "http://localhost:8181/getUnsolvedErr?project=chuye", true );
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if ( xhr.readyState == 4 ) {
+                    var data = JSON.parse( xhr.responseText );
+                    console.dir( xhr.responseText );
+                }
+            }
+        }
+
+        // 插入一条记录
+        function inserOne() {
+            var xhr = new XMLHttpRequest();
+            xhr.open( "post", "http://localhost:8181/insertOne", true );
+            var a = {
+                project : "chuye",
+                err : "timout",
+                version : 36
+            };
+            xhr.send( JSON.stringify( a ) );
+            xhr.onreadystatechange = function () {
+                if ( xhr.readyState == 4 ) {
+                    console.log( xhr.response );
+                }
+            }
+        }
 
 
     })();

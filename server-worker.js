@@ -43,7 +43,7 @@ MongoClient.connect( dbUrl, function ( err, db ) {
             }
 
             // 插入一条数据
-            else if ( req.url == "/insert" ) {
+            else if ( req.url == "/insertOne" ) {
                 res.writeHead( 200, {
                     'Content-Type' : 'application/json; charset=utf-8',
                     "Access-Control-Allow-Origin" : "*"

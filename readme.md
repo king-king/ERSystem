@@ -21,7 +21,7 @@ doc={
 
 ## 都有什么接口？
 
-+ "/insert" [post] 插入一条错误记录
++ "/insertOne" [post] 插入一条错误记录
 ##### 需要发送的数据内容：
     ```javascript
         sendData={
