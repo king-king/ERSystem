@@ -1,4 +1,4 @@
-<img src="src/zach.gif">
+<img src="src/img/zach.gif">
 使用说明
 =========
 
