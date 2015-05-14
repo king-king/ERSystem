@@ -1,0 +1,4 @@
+
+^\/getUnsolvedErr\?[A-Z|a-z|=|&]*$
+
+/getUnsolvedErr?project=projectName

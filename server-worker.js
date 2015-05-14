@@ -7,7 +7,8 @@ var MongoClient = require( 'mongodb' ).MongoClient,
     lookMime = require( "mime" ).look,
     url = require( "url" ),
     fs = require( "fs" ),
-    pt = require( "path" );
+    pt = require( "path" ),
+    query = require( "queryDB" );
 
 
 var dbUrl = 'mongodb://localhost:27017/errlog',
@@ -41,6 +42,7 @@ MongoClient.connect( dbUrl, function ( err, db ) {
                 } );
             }
 
+            // 插入一条数据
             else if ( req.url == "/insert" ) {
                 res.writeHead( 200, {
                     'Content-Type' : 'application/json; charset=utf-8',
@@ -65,7 +67,7 @@ MongoClient.connect( dbUrl, function ( err, db ) {
                         // 如果没有没有必选的数据，则不进行处理，直接返回400
                         res.write( JSON.stringify( {
                             code : 400,
-                            text : "缺少project或err字段"
+                            result : "缺少project或err字段"
                         } ) );
                         res.end();
                     }
@@ -76,19 +78,52 @@ MongoClient.connect( dbUrl, function ( err, db ) {
                             if ( !err ) {
                                 res.write( JSON.stringify( {
                                     code : 200,
-                                    text : ""
+                                    result : ""
                                 } ) );
                             }
                             else {
                                 res.write( JSON.stringify( {
                                     code : 400,
-                                    text : "数据库插入操作失败"
+                                    result : "数据库插入操作失败"
                                 } ) );
                             }
                             res.end();
                         } );
                     }
                 } );
+            }
+
+            //得到某个项目的所有未解决错误
+            else if ( /^\/getUnsolvedErr\?/.test( req.url ) ) {
+                var projectName = url.parse( req.url, true ).query.project;
+                if ( projectName ) {
+                    res.writeHead( 200, {
+                        'Content-Type' : 'application/json; charset=utf-8',
+                        "Access-Control-Allow-Origin" : "*"
+                    } );
+                    query.findAllUnsolvedErr( db, projectName, function ( err, result ) {
+                        if ( err ) {
+                            res.write( JSON.stringify( {
+                                code : 200,
+                                result : err
+                            } ) );
+                        }
+                        else {
+                            res.write( JSON.stringify( {
+                                code : 200,
+                                result : result
+                            } ) );
+                        }
+                        res.end();
+                    } );
+
+                }
+                else {
+                    // query中必须包含project的名称
+                    res.writeHead( 400 );
+                    res.end();
+                }
+
             }
 
             else {

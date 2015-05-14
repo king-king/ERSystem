@@ -9,18 +9,12 @@
     (function () {
 
         var xhr = new XMLHttpRequest();
-        xhr.open( "post", "http://localhost:8181/insert", true );
-
-        var a = {
-            project : "chuye",
-            err : "timout",
-            version : 36
-        };
-
-        xhr.send( JSON.stringify( a ) );
+        xhr.open( "get", "http://localhost:8181/getUnsolvedErr?project=chuye", true );
+        xhr.send();
         xhr.onreadystatechange = function () {
             if ( xhr.readyState == 4 ) {
-                console.log( xhr.response );
+                var data = JSON.parse( xhr.responseText );
+                console.dir( xhr.responseText );
             }
         }
 
