@@ -26,9 +26,12 @@
 <script>
 
 
+    // 将北京时间今日0点构造成utc时间
     var d = new Date();
-    //    d.setDate( d.getDate() - 20 );
-    console.log( d.toLocaleDateString(), d.getHours() )
+    //    d.setMinutes( 0 );
+    //    d.setSeconds( 0 );
+    d.setHours( d.getHours() - 8 );
+    console.log( d )
 
 
 </script>
