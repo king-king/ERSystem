@@ -35,16 +35,16 @@
             sum += item.count;
         } );
         var cur = 0;
-        util.forEach( errlist.result.slice( 0, 6 ), function ( item, i ) {
+        util.forEach( errlist.result.slice( 0, colors.length - 1 ), function ( item, i ) {
             piChartData.push( {
                 value : item.count / sum,
                 color : colors[i]
             } );
             cur += item.count;
         } );
-        errlist.result.length > 6 && piChartData.push( {
+        errlist.result.length > (colors.length - 1) && piChartData.push( {
             value : 1 - cur / sum,
-            color : colors[6]
+            color : colors[colors.length - 1]
         } );
         console.log( errlist );
         chart.pieChart( canvas, piChartData, 0, Math.PI * 2 );
@@ -56,7 +56,7 @@
             element( "div", {
                 classList : "detail-list-item-color-cursor",
                 css : {
-                    "background-color" : colors[i > 5 ? 6 : i]
+                    "background-color" : colors[i > colors.length - 2 ? colors.length - 1 : i]
                 }
             }, itemBorder );
             var text = element( "div", {
