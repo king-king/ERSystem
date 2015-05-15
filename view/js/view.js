@@ -48,13 +48,17 @@
         } );
         console.log( errlist );
         chart.pieChart( canvas, piChartData, 0, Math.PI * 2 );
-
-
         detailLoadingIcon.classList.add( "hide" );
-        forEach( errlist.result, function ( item ) {
+        forEach( errlist.result, function ( item, i ) {
             var itemBorder = element( "div", {
                 classList : "detail-list-item"
             }, detailContent );
+            element( "div", {
+                classList : "detail-list-item-color-cursor",
+                css : {
+                    "background-color" : colors[i > 5 ? 6 : i]
+                }
+            }, itemBorder );
             var text = element( "div", {
                 classList : "text",
                 innerHTML : item["_id"]

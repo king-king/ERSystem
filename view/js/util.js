@@ -36,7 +36,6 @@
         }
     }
 
-
     Node.prototype.position = function ( x, y ) {
         this.style.setProperty( "-webkit-transform", "translate3d(" + x + "px," + y + "px,0)", null );
     };
@@ -45,19 +44,28 @@
         this.parentNode.removeChild( this );
     };
 
+    Node.prototype.css = function ( styles ) {
+        for ( var key in styles ) {
+            this.style.setProperty( key, styles[key], null );
+        }
+    };
+
     function element( tag, arg, parent ) {
-        var t = document.createElement( tag );
+        var el = document.createElement( tag );
         for ( var key in arg ) {
             switch ( key ) {
                 case "classList" :
-                    t.classList.add( arg[key] );
+                    el.classList.add( arg[key] );
+                    break;
+                case "css":
+                    el.css( arg.css );
                     break;
                 default :
-                    t[key] = arg[key];
+                    el[key] = arg[key];
             }
         }
-        parent && parent.appendChild( t );
-        return t;
+        parent && parent.appendChild( el );
+        return el;
     }
 
 

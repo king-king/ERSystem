@@ -114,12 +114,21 @@ html, body {
     width: 100%;
     height: 40px;
     line-height: 40px;
-    padding-left: 10px;
+    padding-left: 20px;
     cursor: pointer;
     color: #FD5340;
     font-size: 18px;
     overflow: hidden;
     box-sizing: border-box;
+    position: relative;
+}
+
+.detail-list-item-color-cursor {
+    height: 38px;
+    width: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .detail-list-item:hover {
