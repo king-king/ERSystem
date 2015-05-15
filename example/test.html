@@ -24,8 +24,6 @@
 <body>
 <div class="item"></div>
 <script>
-
-
     Node.prototype.position = function ( x, y ) {
         this.style.setProperty( "-webkit-transform", "translate3d(" + x + "px," + y + "px,0)", null );
     };
@@ -49,7 +47,15 @@
         }, document.body );
         tip.position( e.pageX, e.pageY );
         return false;
+    };
+
+
+    window.onerror = function () {
+        console.log( arguments );
     }
+
+
 </script>
+<script src="test.js"></script>
 </body>
 </html>
