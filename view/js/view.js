@@ -42,7 +42,7 @@
             } );
             cur += item.count;
         } );
-        errlist.length > 6 && piChartData.push( {
+        errlist.result.length > 6 && piChartData.push( {
             value : 1 - cur / sum,
             color : colors[6]
         } );

@@ -37,10 +37,10 @@
         // 插入一条记录
         function inserOne() {
             var xhr = new XMLHttpRequest();
-            xhr.open( "post", "http://localhost:8181/insertOne", true );
+            xhr.open( "post", "http://localhost:8383/insertOne", true );
             var a = {
-                project : "gjqt",
-                err : "image 404",
+                project : "chuye",
+                err : "403 Forbidden",
                 version : 36
             };
             xhr.send( JSON.stringify( a ) );
