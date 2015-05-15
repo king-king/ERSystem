@@ -19,7 +19,37 @@
     var projectListDom = [];
     var curProjectIndex = 0;
 
+    var colors = ["#FC4141", "#C6CF05", "#12CC09", "#1FB6B1", "#2158B4", "#AD20B5", "#7B7644"];
+
     function generateDetailList( errlist ) {
+        // 生成扇形图
+        detailListBorder.querySelector( ".piChart" ) && detailListBorder.querySelector( ".piChart" ).remove();
+        var canvas = util.element( "canvas", {
+            width : 200,
+            height : 200,
+            classList : "piChart"
+        }, detailListBorder );
+        var sum = 0;
+        var piChartData = [];
+        util.forEach( errlist.result, function ( item ) {
+            sum += item.count;
+        } );
+        var cur = 0;
+        util.forEach( errlist.result.slice( 0, 6 ), function ( item, i ) {
+            piChartData.push( {
+                value : item.count / sum,
+                color : colors[i]
+            } );
+            cur += item.count;
+        } );
+        errlist.length > 6 && piChartData.push( {
+            value : 1 - cur / sum,
+            color : colors[6]
+        } );
+        console.log( errlist );
+        chart.pieChart( canvas, piChartData, 0, Math.PI * 2 );
+
+
         detailLoadingIcon.classList.add( "hide" );
         forEach( errlist.result, function ( item ) {
             var itemBorder = element( "div", {
