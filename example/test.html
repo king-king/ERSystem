@@ -24,38 +24,13 @@
 <body>
 <div class="item"></div>
 <script>
-    Node.prototype.position = function ( x, y ) {
-        this.style.setProperty( "-webkit-transform", "translate3d(" + x + "px," + y + "px,0)", null );
-    };
-
-    function element( tag, arg, parent ) {
-        var t = document.createElement( tag );
-        for ( var key in arg ) {
-            switch ( key ) {
-                case "classList" :
-                    t.classList.add( arg[key] );
-            }
-        }
-        parent && parent.appendChild( t );
-        return t;
-    }
-
-    document.querySelector( ".item" ).oncontextmenu = function ( e ) {
-        console.log( "right", e.pageX );
-        var tip = element( "div", {
-            classList : "tip"
-        }, document.body );
-        tip.position( e.pageX, e.pageY );
-        return false;
-    };
 
 
-    window.onerror = function () {
-        console.log( arguments );
-    }
+    var d = new Date();
+    //    d.setDate( d.getDate() - 20 );
+    console.log( d.toLocaleDateString(), d.getHours() )
 
 
 </script>
-<script src="test.js"></script>
 </body>
 </html>

@@ -1,10 +1,25 @@
-/**
- * Created by WQ on 2015/5/15.
- */
-
-
-var img = new Image();
-img.src = "1111.jpg";
-img.onerror = function ( e ) {
-    console.log( e )
-};
+d = new Date()
+db.chuye.aggregate( [
+    {
+        $match : {
+            solve : false
+        }
+    },
+    {
+        $project : {
+            year : {$year : "$date"},
+            month : {$month : "$date"},
+            day : {$dayOfMonth : "$date"},
+            hour : {$hour : "$date"},
+            err : 1
+        }
+    },
+    {
+        $match : {
+            year : d.getFullYear(),
+            month : d.getMonth() + 1,
+            day : d.getDate(),
+            err : "510 Not Extended"
+        }
+    }
+] )
