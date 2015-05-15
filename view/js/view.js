@@ -37,17 +37,23 @@
         } );
     }
 
+    function generateProjectItem( name ) {
+        var item = element( "div", {
+            classList : "project-list-item",
+            innerHTML : name
+        }, projectListBorder );
+        element( "div", {
+            classList : "project-list-item-select-icon"
+        }, item );
+        return item;
+    }
 
     !function () {
         inv.getProjectList( function ( data ) {
-            var item0;
             if ( data.code == 200 ) {
                 projectListLoadingIcon.remove();
                 forEach( data.result, function ( item, i ) {
-                    var it = element( "div", {
-                        classList : "project-list-item",
-                        innerHTML : item.name
-                    }, projectListBorder );
+                    var it = generateProjectItem( item.name );
                     it.onclick = function () {
                         if ( curProjectIndex != i ) {
                             detailLoadingIcon.classList.remove( "hide" );

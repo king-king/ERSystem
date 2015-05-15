@@ -35,7 +35,7 @@ html, body {
 .project-list-border {
     overflow-y: auto;
     width: 20%;
-    border-right: 3px solid #a1a1a1;
+    border-right: 3px solid rgba(161, 161, 161, 0.2);
     top: 0;
     left: 0;
 }
@@ -57,14 +57,23 @@ html, body {
     font-size: 20px;
     overflow: hidden;
     box-sizing: border-box;
+    position: relative;
 }
 
-.project-list-border .project-list-item.select {
-    background: orange;
+.project-list-item-select-icon {
+    width: 16px;
+    height: 16px;
+    background: url("../img/selected-icon.png") no-repeat 0 0;
+    background-size: 16px auto;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    -webkit-transform: translate3d(0, -50%, 0);
+    display: none;
 }
 
-.project-list-border .project-list-item:hover {
-    background: #e1e1e1;
+.project-list-border .project-list-item.select .project-list-item-select-icon {
+    display: block;
 }
 
 .project-list-border-title {
@@ -91,7 +100,7 @@ html, body {
 
 .detail-content {
     position: absolute;
-    top: 10%;
+    top: 300px;
     height: 90%;
     left: 10%;
     width: 80%;
@@ -104,13 +113,13 @@ html, body {
     padding-left: 10px;
     cursor: pointer;
     color: #FD5340;
-    font-size: 20px;
+    font-size: 18px;
     overflow: hidden;
     box-sizing: border-box;
 }
 
 .detail-list-item:hover {
-    background: #f1f1f1;
+    /*background: #f1f1f1;*/
 }
 
 .detail-list-item .text {
