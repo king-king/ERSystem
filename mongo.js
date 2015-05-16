@@ -61,7 +61,7 @@ MongoClient.connect( url, function ( err, db ) {
                     _id : {
                         "year" : "$year",
                         "month" : "$month",
-                        "data" : "$data",
+                        "day" : "$day",
                         "hour" : "$hour"
                     },
                     count : {
