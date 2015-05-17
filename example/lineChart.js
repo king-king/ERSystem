@@ -21,6 +21,20 @@
 		return svg;
 	};
 
+
+	function getMax( num ) {
+		var result = 0;
+		var x = Math.log10( num ) << 0;
+		if ( x < 1 ) {
+			result = 10;
+		}
+		else {
+			x = Math.pow( 10, x - 1 );
+			result = Math.ceil( num / x + 0.00001 ) * x;
+		}
+		return result;
+	}
+
 	function lineChart( data, color, w, h, x, y, parent ) {
 		var svg = SVG( w, h, parent );
 		var x0 = 20, y0 = h - 20;
@@ -57,25 +71,61 @@
 			} );
 		}
 
+		function text( x, y, text ) {
+			var t = svgElement( "text", {
+				x : px( x ),
+				y : py( y )
+			} );
+			t.innerHTML = text;
+			return t;
+		}
+
+		function polyline( points, color ) {
+			return svgElement( "polyline", {
+				fill : "none",
+				stroke : color,
+				"stroke-width" : 2,
+				points : positions
+			} );
+		}
+
 		var max = 0;
 		var points = [];
 		var dx = (w - 40) / (data.length - 1) << 0;
+		var dy = (h - 40) / 4 << 0;
 		data.forEach( function ( d, i ) {
 			if ( max < d.value ) {
 				max = d.value;
 			}
 			svg.appendChild( line( dx * i, 0, dx * i, y0 - 20, "#aaa", 1 ) );
 		} );
+		util.loop( 5, function ( i ) {
+			svg.appendChild( line( 0, dy * i, w - 40, dy * i, "#aaa", 1 ) );
+			var t = text( -2, dy * i - 5, dy * i );
+			t.style["text-anchor"] = "end";
+			t.style.fill = "#aaa";
+			t.style["font-size"] = "10px";
+			svg.appendChild( t );
+		} );
+		max = getMax( max );
 
-		if ( Math.log10( max ) << 0 == 0 ) {
-			max = 10;
-		}
-		else {
-			max = Math.ceil( max / (((Math.log10( max ) << 0) - 1)*10 ) )* (Math.log10( max ) << 0 - 1);
-		}
-
+		var positions = "";
+		data.forEach( function ( d, i ) {
+			var x = dx * i,
+				y = d.value / max * (h - 40) << 0;
+			positions += px( x ) + "," + py( y ) + " ";
+		} );
+		svg.appendChild( polyline( positions, color ) );
+		data.forEach( function ( d, i ) {
+			var x = dx * i,
+				y = d.value / max * (h - 40) << 0;
+			var p = point( x, y, color, d.value );
+			points.push( p );
+			svg.appendChild( p );
+		} );
 		return svg;
 	}
+
 
 	window.Chart = {
 		lineChart : lineChart

@@ -4,9 +4,6 @@
     <meta charset="utf-8">
     <title></title>
     <style>
-        svg {
-            /*background: #000;*/
-        }
     </style>
 </head>
 <body>
@@ -15,7 +12,25 @@
 <script>
     (function () {
 
-        var chart = Chart.lineChart( [{}, {}, {}, {}, {}], "white", 500, 300, 0, 0, document.body );
+        var chart = Chart.lineChart(
+                [
+                    {
+                        value : 23
+                    },
+                    {
+                        value : 43
+                    },
+                    {
+                        value : 223
+                    },
+                    {
+                        value : 2
+                    },
+                    {
+                        value : 3
+                    }
+                ],
+                "blue", 500, 300, 0, 0, document.body );
 
 
     })()
