@@ -115,7 +115,6 @@ html, body {
     height: 40px;
     line-height: 40px;
     padding-left: 20px;
-    cursor: pointer;
     color: #FD5340;
     font-size: 18px;
     overflow: hidden;
@@ -136,12 +135,29 @@ html, body {
 }
 
 .detail-list-item .text {
-    width: 90%;
+    width: 80%;
     display: inline-block;
     overflow: hidden;
     float: left;
     white-space: nowrap;
     text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.detail-list-item .solve-btn {
+    width: 10%;
+    overflow: hidden;
+    float: left;
+    cursor: pointer;
+    background: greenyellow;
+    color: #000;
+    text-align: center;
+    opacity: 0;
+    border-radius: 3px;
+}
+
+.detail-list-item .solve-btn:hover {
+    opacity: 1;
 }
 
 .detail-list-item .count {

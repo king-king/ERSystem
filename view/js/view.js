@@ -53,7 +53,17 @@
             var itemBorder = element( "div", {
                 classList : "detail-list-item"
             }, detailContent );
-            itemBorder.onclick = function () {
+            element( "div", {
+                classList : "detail-list-item-color-cursor",
+                css : {
+                    "background-color" : colors[i > colors.length - 2 ? colors.length - 1 : i]
+                }
+            }, itemBorder );
+            var text = element( "div", {
+                classList : "text",
+                innerHTML : item["_id"]
+            }, itemBorder );
+            text.onclick = function () {
                 // 得到某个错误的时间分布
                 // 获取第一个项目的出错时间分布
                 inv.getTheUnsolvedErrCountInTodayByHours( document.querySelector( ".project-list-item.select" ).name, item["_id"], function ( data ) {
@@ -85,21 +95,17 @@
                     }
                 } );
             };
-            element( "div", {
-                classList : "detail-list-item-color-cursor",
-                css : {
-                    "background-color" : colors[i > colors.length - 2 ? colors.length - 1 : i]
-                }
-            }, itemBorder );
-            var text = element( "div", {
-                classList : "text",
-                innerHTML : item["_id"]
-            }, itemBorder );
             text.title = item["_id"];
             element( "count", {
                 classList : "count",
                 innerHTML : item.count
             }, itemBorder );
+
+            var solveBtn = element( "div", {
+                classList : "solve-btn",
+                innerHTML : "解决"
+            }, itemBorder )
+
         } );
     }
 
