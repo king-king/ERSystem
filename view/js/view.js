@@ -53,6 +53,38 @@
             var itemBorder = element( "div", {
                 classList : "detail-list-item"
             }, detailContent );
+            itemBorder.onclick = function () {
+                // 得到某个错误的时间分布
+                // 获取第一个项目的出错时间分布
+                inv.getTheUnsolvedErrCountInTodayByHours( document.querySelector( ".project-list-item.select" ).name, item["_id"], function ( data ) {
+                    var sendStamp = (new Date()).getTime();
+                    lineChartTimeStamp = sendStamp;
+                    var lineData = [];
+                    var curHour = (new Date()).getHours();
+                    util.loop( 24, function ( i ) {
+                        lineData.push( {
+                            value : i <= curHour ? 0 : -1
+                        } );
+                    } );
+                    if ( data.code == 200 ) {
+                        console.log( data );
+                        if ( lineChartTimeStamp <= sendStamp ) {
+                            // 如果這個請求是最新的才會更新折綫圖
+                            util.forEach( data.result, function ( item ) {
+                                lineData[(item["_id"].hour + 8) % 24].value = item.count;
+                            } );
+                            detailListBorder.querySelector( ".line-chart" ) && detailListBorder.querySelector( ".line-chart" ).remove();
+                            var lineChart = chart.lineChart( lineData, colors[i > colors.length - 2 ? colors.length - 1 : i], detailListBorder.offsetWidth - 400, 200, detailListBorder );
+                            lineChart.svg.classList.add( "line-chart" );
+                            lineChart.svg.css( {
+                                position : "absolute",
+                                top : "50px",
+                                left : "270px"
+                            } );
+                        }
+                    }
+                } );
+            };
             element( "div", {
                 classList : "detail-list-item-color-cursor",
                 css : {
@@ -74,7 +106,8 @@
     function generateProjectItem( name ) {
         var item = element( "div", {
             classList : "project-list-item",
-            innerHTML : name
+            innerHTML : name,
+            name : name
         }, projectListBorder );
         element( "div", {
             classList : "project-list-item-select-icon"

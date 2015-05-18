@@ -16,10 +16,15 @@
         util.ajaxGet( "/getUnsolvedErrCountInTodayByHours?project=" + projectName, callback );
     }
 
+    function getTheUnsolvedErrCountInTodayByHours( projectName, errName, callback ) {
+        util.ajaxGet( "/getTheUnsolvedErrCountInTodayByHours?project=" + projectName + "&err=" + errName, callback );
+    }
+
     window.inv = {
         getProjectList : getProjectList,
         getUnsolvedErr : getUnsolvedErr,
-        getUnsolvedErrCountInTodayByHours : getUnsolvedErrCountInTodayByHours
+        getUnsolvedErrCountInTodayByHours : getUnsolvedErrCountInTodayByHours,
+        getTheUnsolvedErrCountInTodayByHours : getTheUnsolvedErrCountInTodayByHours
     }
 
 

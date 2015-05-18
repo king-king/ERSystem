@@ -151,7 +151,6 @@ MongoClient.connect( dbUrl, function ( err, db ) {
             // 得到一个项目在今天每小时错误出现的次数
             else if ( /^\/getUnsolvedErrCountInTodayByHours\?/.test( req.url ) ) {
                 var projectName2 = url.parse( req.url, true ).query.project;
-                console.log( projectName2 );
                 // 判断是否有项目的名字
                 if ( projectName2 ) {
                     res.writeHead( 200, {
@@ -176,6 +175,41 @@ MongoClient.connect( dbUrl, function ( err, db ) {
                 }
                 else {
                     // query中必须包含project的名称
+                    res.writeHead( 400 );
+                    res.end();
+                }
+
+            }
+
+            // 得到一个项目中的某个错误在今天每小时错误出现的次数
+            else if ( /^\/getTheUnsolvedErrCountInTodayByHours\?/.test( decodeURIComponent( req.url ) ) ) {
+                var projectName3 = url.parse( req.url, true ).query.project;
+                var errName = url.parse( req.url, true ).query.err;
+                // 判断是否有项目的名字
+                if ( projectName3 || errName ) {
+                    res.writeHead( 200, {
+                        'Content-Type' : 'application/json; charset=utf-8',
+                        "Access-Control-Allow-Origin" : "*"
+                    } );
+                    query.getTheUnsolvedErrCountInTodayByHours( db, projectName3, errName, function ( err, result ) {
+                            if ( err ) {
+                                res.write( JSON.stringify( {
+                                    code : 500,
+                                    result : err
+                                } ) );
+                            }
+                            else {
+                                res.write( JSON.stringify( {
+                                    code : 200,
+                                    result : result
+                                } ) );
+                            }
+                            res.end();
+                        }
+                    );
+                }
+                else {
+                    // query中必须包含project和err
                     res.writeHead( 400 );
                     res.end();
                 }

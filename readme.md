@@ -91,3 +91,20 @@ doc={
     
     ```
 注意，返回的小时是utc时间，要转换成北京时间还需要加8小时
+
+     
++ "/getTheUnsolvedErrCountInTodayByHours?project=projectName'&'err=errName" [get] 得到一个项目中的某个错误在今天每小时错误出现的次数
+    ```javascript
+    {
+        "code": 200,
+        "result": [
+            {
+                "_id": {
+                    "hour": 2
+                },
+                "count": 200
+            }
+        ]
+    }
+    
+    ```
