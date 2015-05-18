@@ -82,6 +82,7 @@
         return item;
     }
 
+
     !function () {
         inv.getProjectList( function ( data ) {
             if ( data.code == 200 ) {
@@ -96,9 +97,35 @@
                             projectListDom[curProjectIndex].classList.add( "select" );
                             detailContent.innerHTML = "";
                             detailLoadingIcon.classList.remove( "hide" );
+                            // 当点击左侧列表中的项目时候，要在右侧显示内容，先获取没有解决的错误列表
                             inv.getUnsolvedErr( item.name, function ( errlist ) {
                                 if ( errlist.code == 200 ) {
                                     generateDetailList( errlist );
+                                }
+                            } );
+                            // 得到当前项目的出错时间分布（当天）
+                            inv.getUnsolvedErrCountInTodayByHours( data.result[i].name, function ( data ) {
+                                var lineData = [];
+                                var curHour = (new Date()).getHours();
+                                util.loop( 24, function ( i ) {
+                                    lineData.push( {
+                                        value : i <= curHour ? 0 : -1
+                                    } );
+                                } );
+                                if ( data.code == 200 ) {
+                                    util.forEach( data.result, function ( item ) {
+                                        lineData[(item["_id"].hour + 8) % 24].value = item.count;
+                                    } );
+                                    detailListBorder.querySelector( ".line-chart" ) && detailListBorder.querySelector( ".line-chart" ).remove();
+                                    var lineChart = chart.lineChart( lineData, "red", detailListBorder.offsetWidth - 400, 200, detailListBorder );
+                                    lineChart.svg.classList.add( "line-chart" );
+                                    lineChart.svg.css( {
+                                        position : "absolute",
+                                        top : "50px",
+                                        left : "270px"
+                                    } );
+
+                                    console.log( lineData );
                                 }
                             } );
                         }
@@ -115,8 +142,28 @@
                         }
                     } );
                     // 获取第一个项目的出错时间分布
-                    inv.getUnsolvedErrCountInTodayByHours( data.result[0].name, function ( result ) {
-                        console.log( result );
+                    inv.getUnsolvedErrCountInTodayByHours( data.result[0].name, function ( data ) {
+                        var lineData = [];
+                        var curHour = (new Date()).getHours();
+                        util.loop( 24, function ( i ) {
+                            lineData.push( {
+                                value : i <= curHour ? 0 : -1
+                            } );
+                        } );
+                        if ( data.code == 200 ) {
+                            util.forEach( data.result, function ( item ) {
+                                lineData[(item["_id"].hour + 8) % 24].value = item.count;
+                            } );
+                            var lineChart = chart.lineChart( lineData, "red", detailListBorder.offsetWidth - 400, 200, detailListBorder );
+                            lineChart.svg.classList.add( "line-chart" );
+                            lineChart.svg.css( {
+                                position : "absolute",
+                                top : "50px",
+                                left : "270px"
+                            } );
+
+                            console.log( lineData );
+                        }
                     } );
                 }
             }

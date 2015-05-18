@@ -126,7 +126,7 @@
         }
 
         var max = 0;
-        var dx = (w - x0 - 20) / (data.length - 1) << 0;
+        var dx = (w - x0 - 20) / (data.length - 1);
         var dy = ( y0 - 20) / 4 << 0;
         // 制作经纬线
         data.forEach( function ( d, i ) {
@@ -144,9 +144,10 @@
         } );
         // 得到纵坐标的最大值
         max = getMax( max );
+        max == 10 && (max = 50);
         util.loop( 5, function ( i ) {
             svg.appendChild( line( 0, dy * i, w - x0 - 20, dy * i, "#ccc", 1 ) );
-            var t = text( -2, dy * i - 5, max / 4 * i );
+            var t = text( -5, dy * i - 5, max / 4 * i );
             t.classList.add( "y-value" );
             t.style["text-anchor"] = "end";
             t.style.fill = "#aaa";
@@ -156,7 +157,7 @@
 
         var positions = "";
         data.forEach( function ( d, i ) {
-            if ( d.value ) {
+            if ( d.value >= 0 ) {
                 var x = dx * i,
                     y = d.value / max * (h - 40) << 0;
                 positions += px( x ) + "," + py( y ) + " ";
@@ -164,7 +165,7 @@
         } );
         svg.appendChild( polyline( positions, color ) );
         data.forEach( function ( d, i ) {
-            if ( d.value ) {
+            if ( d.value >= 0 ) {
                 var x = dx * i,
                     y = d.value / max * (h - 40) << 0;
                 svg.appendChild( point( x, y, color, d.value ) );
