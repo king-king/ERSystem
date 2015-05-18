@@ -46,7 +46,7 @@
             value : 1 - cur / sum,
             color : colors[colors.length - 1]
         } );
-        console.log( errlist );
+        //console.log( errlist );
         chart.pieChart( canvas, piChartData, 0, Math.PI * 2 );
         detailLoadingIcon.classList.add( "hide" );
         forEach( errlist.result, function ( item, i ) {

@@ -39,8 +39,8 @@
             var xhr = new XMLHttpRequest();
             xhr.open( "post", "http://localhost:8383/insertOne", true );
             var a = {
-                project : "chuye",
-                err : "bad request 400",
+                project : "boao",
+                err : "image 404",
                 version : 36
             };
             xhr.send( JSON.stringify( a ) );
@@ -52,7 +52,7 @@
         }
 
 
-        for ( var i = 0; i < 10000; i++ ) {
+        for ( var i = 0; i < 200; i++ ) {
             inserOne();
         }
         alert( "ok" );

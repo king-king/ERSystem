@@ -76,4 +76,17 @@ doc={
      ```
      
 + "/getUnsolvedErrCountInTodayByHours?project=projectName" [get] 得到一个项目在今天每小时错误出现的次数
-
+    ```javascript
+    {
+        "code": 200,
+        "result": [
+            {
+                "_id": {
+                    "hour": 2
+                },
+                "count": 200
+            }
+        ]
+    }
+    
+    ```

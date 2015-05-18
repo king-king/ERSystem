@@ -149,8 +149,9 @@ MongoClient.connect( dbUrl, function ( err, db ) {
             }
 
             // 得到一个项目在今天每小时错误出现的次数
-            else if ( req.url == "/getUnsolvedErrCountInTodayByHours" ) {
+            else if ( /^\/getUnsolvedErrCountInTodayByHours\?/.test( req.url ) ) {
                 var projectName2 = url.parse( req.url, true ).query.project;
+                console.log( projectName2 );
                 // 判断是否有项目的名字
                 if ( projectName2 ) {
                     res.writeHead( 200, {
