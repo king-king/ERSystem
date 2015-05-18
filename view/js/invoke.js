@@ -3,19 +3,23 @@
  */
 (function () {
 
-    // 得到项目列表
     function getProjectList( callback ) {
         util.ajaxGet( "/getProjectList", callback );
     }
 
-    // 得到某个项目的未解决err
     function getUnsolvedErr( projectName, callback ) {
         util.ajaxGet( "/getUnsolvedErr?project=" + projectName, callback );
     }
 
+    // 寰楀埌涓�涓」鐩湪浠婂ぉ姣忓皬鏃堕敊璇嚭鐜扮殑娆℃暟
+    function getUnsolvedErrCountInTodayByHours( projectName, callback ) {
+        util.ajaxGet( "/getUnsolvedErrCountInTodayByHours?project=" + projectName, callback );
+    }
+
     window.inv = {
         getProjectList : getProjectList,
-        getUnsolvedErr : getUnsolvedErr
+        getUnsolvedErr : getUnsolvedErr,
+        getUnsolvedErrCountInTodayByHours : getUnsolvedErrCountInTodayByHours
     }
 
 

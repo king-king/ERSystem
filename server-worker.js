@@ -116,7 +116,7 @@ MongoClient.connect( dbUrl, function ( err, db ) {
                 } )
             }
 
-            //得到某个项目的所有未解决错误
+            // 得到某个项目的所有未解决错误
             else if ( /^\/getUnsolvedErr\?/.test( req.url ) ) {
                 var projectName = url.parse( req.url, true ).query.project;
                 if ( projectName ) {
@@ -146,6 +146,39 @@ MongoClient.connect( dbUrl, function ( err, db ) {
                     res.writeHead( 400 );
                     res.end();
                 }
+            }
+
+            // 得到一个项目在今天每小时错误出现的次数
+            else if ( req.url == "/getUnsolvedErrCountInTodayByHours" ) {
+                var projectName2 = url.parse( req.url, true ).query.project;
+                // 判断是否有项目的名字
+                if ( projectName2 ) {
+                    res.writeHead( 200, {
+                        'Content-Type' : 'application/json; charset=utf-8',
+                        "Access-Control-Allow-Origin" : "*"
+                    } );
+                    query.getUnsolvedErrCountInTodayByHours( db, projectName2, function ( err, result ) {
+                        if ( err ) {
+                            res.write( JSON.stringify( {
+                                code : 500,
+                                result : err
+                            } ) );
+                        }
+                        else {
+                            res.write( JSON.stringify( {
+                                code : 200,
+                                result : result
+                            } ) );
+                        }
+                        res.end();
+                    } );
+                }
+                else {
+                    // query中必须包含project的名称
+                    res.writeHead( 400 );
+                    res.end();
+                }
+
             }
 
             else {

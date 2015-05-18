@@ -74,4 +74,6 @@ doc={
         }
             
      ```
+     
++ "/getUnsolvedErrCountInTodayByHours?project=projectName" [get] 得到一个项目在今天每小时错误出现的次数
 

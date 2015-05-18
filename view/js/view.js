@@ -105,14 +105,18 @@
                     };
                     projectListDom.push( it );
                 } );
-                // 获取第一个项目的错误列表
                 if ( data.result.length != 0 ) {
                     detailLoadingIcon.classList.remove( "hide" );
                     projectListDom[0].classList.add( "select" );
+                    // 获取第一个项目的错误列表
                     inv.getUnsolvedErr( data.result[0].name, function ( errlist ) {
                         if ( errlist.code == 200 ) {
                             generateDetailList( errlist );
                         }
+                    } );
+                    // 获取第一个项目的出错时间分布
+                    inv.getUnsolvedErrCountInTodayByHours( data.result[0].name, function ( result ) {
+                        console.log( result );
                     } );
                 }
             }
