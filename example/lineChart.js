@@ -21,7 +21,6 @@
         return svg;
     };
 
-
     function getMax( num ) {
         var result = 0;
         var x = Math.log10( num ) << 0;
