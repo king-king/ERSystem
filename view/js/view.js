@@ -118,6 +118,10 @@
         element( "div", {
             classList : "project-list-item-select-icon"
         }, item );
+        var deleteBtn = element( "div", {
+            classList : "project-list-item-delete-btn",
+            innerHTML : "删除"
+        }, item );
         return item;
     }
 

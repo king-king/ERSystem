@@ -33,6 +33,8 @@ doc={
         
     ```
 
++ "/deleteOneProject" [get] 删除一条
+
 + "/getUnsolvedErr?project=projectName" [get] 得到项目projectName的所有未解决err
 ##### 返回的数据结构：
      ```javascript

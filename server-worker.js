@@ -216,6 +216,11 @@ MongoClient.connect( dbUrl, function ( err, db ) {
 
             }
 
+            else if ( /^\/deleteOneProject\?/.test( decodeURIComponent( req.url ) ) ) {
+
+            }
+
+
             else {
                 // 不能处理的url都按照400处理
                 res.writeHead( 400 );

@@ -20,6 +20,12 @@
         util.ajaxGet( "/getTheUnsolvedErrCountInTodayByHours?project=" + projectName + "&err=" + errName, callback );
     }
 
+    // 删除一个项目
+    function deleteOneProject( projectName, callback ) {
+        util.ajaxGet()
+    }
+
+
     window.inv = {
         getProjectList : getProjectList,
         getUnsolvedErr : getUnsolvedErr,
