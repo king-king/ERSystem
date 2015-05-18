@@ -36,8 +36,12 @@
                         value : null
                     }
                 ],
-                "blue", 500, 300, 0, 0, document.body );
+                "blue", 500, 300, document.body );
 
+
+        setTimeout( function () {
+            chart.redraw()
+        }, 3000 );
 
     })()
 </script>

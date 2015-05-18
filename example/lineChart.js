@@ -35,7 +35,7 @@
         return result;
     }
 
-    function lineChart( data, color, w, h, x, y, parent ) {
+    function lineChart( data, color, w, h, parent ) {
         var svg = SVG( w, h, parent );
         var x0 = 40, y0 = h - 20;
 
@@ -55,7 +55,8 @@
                 fill : color,
                 title : title,
                 stroke : "white",
-                "stroke-width" : 2
+                "stroke-width" : 2,
+                "class" : "point"
             } );
         }
 
@@ -85,7 +86,8 @@
                 fill : "none",
                 stroke : color,
                 "stroke-width" : 2,
-                points : positions
+                points : points,
+                "class" : "polyline"
             } );
         }
 
@@ -111,6 +113,7 @@
         util.loop( 5, function ( i ) {
             svg.appendChild( line( 0, dy * i, w - x0 - 20, dy * i, "#ccc", 1 ) );
             var t = text( -2, dy * i - 5, max / 4 * i );
+            t.classList.add( "y-value" );
             t.style["text-anchor"] = "end";
             t.style.fill = "#aaa";
             t.style["font-size"] = "10px";
@@ -133,10 +136,24 @@
                 svg.appendChild( point( x, y, color, d.value ) );
             }
         } );
+
+        function removeAll( els ) {
+            util.forEach( els, function ( el, i ) {
+                el.remove();
+            } );
+        }
+
         return {
             svg : svg,
-            redraw : function () {
+            redraw : function ( data, color ) {
+                // 纵坐标擦掉，重新绘制
+                removeAll( svg.querySelectorAll( ".y-value" ) );
 
+                // 擦掉所有点，重新绘制
+                removeAll( svg.querySelectorAll( ".point" ) );
+
+                // 擦掉折线，重新绘制
+                svg.querySelector( ".polyline" ).remove();
             }
         };
     }
