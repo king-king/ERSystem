@@ -154,6 +154,47 @@
 
                 // 擦掉折线，重新绘制
                 svg.querySelector( ".polyline" ).remove();
+
+                max = 0;
+                data.forEach( function ( d, i ) {
+                    if ( max < d.value ) {
+                        max = d.value;
+                    }
+                    if ( i != 0 ) {
+                        var t = text( dx * i, -14, i );
+                        t.style["text-anchor"] = "middle";
+                        t.style.fill = "#aaa";
+                        t.style["font-size"] = "10px";
+                        svg.appendChild( t );
+                    }
+                } );
+                max = getMax( max );
+                util.loop( 5, function ( i ) {
+                    var t = text( -2, dy * i - 5, max / 4 * i );
+                    t.classList.add( "y-value" );
+                    t.style["text-anchor"] = "end";
+                    t.style.fill = "#aaa";
+                    t.style["font-size"] = "10px";
+                    svg.appendChild( t );
+                } );
+
+                positions = "";
+                data.forEach( function ( d, i ) {
+                    if ( d.value ) {
+                        var x = dx * i,
+                            y = d.value / max * (h - 40) << 0;
+                        positions += px( x ) + "," + py( y ) + " ";
+                    }
+                } );
+                svg.appendChild( polyline( positions, color ) );
+                data.forEach( function ( d, i ) {
+                    if ( d.value ) {
+                        var x = dx * i,
+                            y = d.value / max * (h - 40) << 0;
+                        svg.appendChild( point( x, y, color, d.value ) );
+                    }
+                } );
+
             }
         };
     }

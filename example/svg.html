@@ -40,7 +40,29 @@
 
 
         setTimeout( function () {
-            chart.redraw()
+            chart.redraw( [
+                {
+                    value : 23
+                },
+                {
+                    value : 43
+                },
+                {
+                    value : 223
+                },
+                {
+                    value : 300
+                },
+                {
+                    value : 3
+                },
+                {
+                    value : null
+                },
+                {
+                    value : null
+                }
+            ], "#C6CF05" )
         }, 3000 );
 
     })()
