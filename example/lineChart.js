@@ -16,7 +16,7 @@
     var SVG = function ( w, h, parent ) {
         var svg = svgElement( "svg", {
             width : w,
-            height : h,
+            height : h
         }, parent );
         return svg;
     };
@@ -37,7 +37,7 @@
 
     function lineChart( data, color, w, h, x, y, parent ) {
         var svg = SVG( w, h, parent );
-        var x0 = 20, y0 = h - 20;
+        var x0 = 40, y0 = h - 20;
 
         function px( x ) {
             return x + x0;
@@ -71,12 +71,12 @@
             } );
         }
 
-        function text( x, y, text ) {
+        function text( x, y, words ) {
             var t = svgElement( "text", {
                 x : px( x ),
                 y : py( y )
             } );
-            t.innerHTML = text;
+            t.innerHTML = words;
             return t;
         }
 
@@ -90,25 +90,32 @@
         }
 
         var max = 0;
-        var dx = (w - 40) / (data.length - 1) << 0;
-        var dy = (h - 40) / 4 << 0;
+        var dx = (w - x0 - 20) / (data.length - 1) << 0;
+        var dy = ( y0 - 20) / 4 << 0;
         // 制作经纬线
         data.forEach( function ( d, i ) {
             if ( max < d.value ) {
                 max = d.value;
             }
-            svg.appendChild( line( dx * i, 0, dx * i, y0 - 20, "#aaa", 1 ) );
+            svg.appendChild( line( dx * i, 0, dx * i, y0 - 20, "#ccc", 1 ) );
+            if ( i != 0 ) {
+                var t = text( dx * i, -14, i );
+                t.style["text-anchor"] = "middle";
+                t.style.fill = "#aaa";
+                t.style["font-size"] = "10px";
+                svg.appendChild( t );
+            }
         } );
+        // 得到纵坐标的最大值
+        max = getMax( max );
         util.loop( 5, function ( i ) {
-            svg.appendChild( line( 0, dy * i, w - 40, dy * i, "#aaa", 1 ) );
-            var t = text( -2, dy * i - 5, dy * i );
+            svg.appendChild( line( 0, dy * i, w - x0 - 20, dy * i, "#ccc", 1 ) );
+            var t = text( -2, dy * i - 5, max / 4 * i );
             t.style["text-anchor"] = "end";
             t.style.fill = "#aaa";
             t.style["font-size"] = "10px";
             svg.appendChild( t );
         } );
-        // 得到纵坐标的最大值
-        max = getMax( max );
 
         var positions = "";
         data.forEach( function ( d, i ) {
@@ -126,7 +133,12 @@
                 svg.appendChild( point( x, y, color, d.value ) );
             }
         } );
-        return svg;
+        return {
+            svg : svg,
+            redraw : function () {
+
+            }
+        };
     }
 
 
