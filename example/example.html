@@ -40,7 +40,7 @@
             xhr.open( "post", "http://localhost:8383/insertOne", true );
             var a = {
                 project : "chuye",
-                err : "database err 500",
+                err : "image 404",
                 version : 36
             };
             xhr.send( JSON.stringify( a ) );
@@ -52,7 +52,7 @@
         }
 
 
-        for ( var i = 0; i < 289; i++ ) {
+        for ( var i = 0; i < 219; i++ ) {
             inserOne();
         }
 
