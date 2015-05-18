@@ -82,6 +82,7 @@
         return item;
     }
 
+    var lineChartTimeStamp = 0;
 
     !function () {
         inv.getProjectList( function ( data ) {
@@ -105,6 +106,10 @@
                             } );
                             // 得到当前项目的出错时间分布（当天）
                             inv.getUnsolvedErrCountInTodayByHours( data.result[i].name, function ( data ) {
+                                var sendStamp = (new Date()).getTime();
+                                if ( lineChartTimeStamp < sendStamp ) {
+                                    lineChartTimeStamp = sendStamp;
+                                }
                                 var lineData = [];
                                 var curHour = (new Date()).getHours();
                                 util.loop( 24, function ( i ) {
@@ -113,18 +118,19 @@
                                     } );
                                 } );
                                 if ( data.code == 200 ) {
-                                    util.forEach( data.result, function ( item ) {
-                                        lineData[(item["_id"].hour + 8) % 24].value = item.count;
-                                    } );
-                                    detailListBorder.querySelector( ".line-chart" ) && detailListBorder.querySelector( ".line-chart" ).remove();
-                                    var lineChart = chart.lineChart( lineData, "red", detailListBorder.offsetWidth - 400, 200, detailListBorder );
-                                    lineChart.svg.classList.add( "line-chart" );
-                                    lineChart.svg.css( {
-                                        position : "absolute",
-                                        top : "50px",
-                                        left : "270px"
-                                    } );
-
+                                    if ( lineChartTimeStamp <= sendStamp ) {
+                                        util.forEach( data.result, function ( item ) {
+                                            lineData[(item["_id"].hour + 8) % 24].value = item.count;
+                                        } );
+                                        detailListBorder.querySelector( ".line-chart" ) && detailListBorder.querySelector( ".line-chart" ).remove();
+                                        var lineChart = chart.lineChart( lineData, "red", detailListBorder.offsetWidth - 400, 200, detailListBorder );
+                                        lineChart.svg.classList.add( "line-chart" );
+                                        lineChart.svg.css( {
+                                            position : "absolute",
+                                            top : "50px",
+                                            left : "270px"
+                                        } );
+                                    }
                                 }
                             } );
                         }
@@ -142,6 +148,8 @@
                     } );
                     // 获取第一个项目的出错时间分布
                     inv.getUnsolvedErrCountInTodayByHours( data.result[0].name, function ( data ) {
+                        var sendStamp = (new Date()).getTime();
+                        lineChartTimeStamp = sendStamp;
                         var lineData = [];
                         var curHour = (new Date()).getHours();
                         util.loop( 24, function ( i ) {
@@ -150,18 +158,19 @@
                             } );
                         } );
                         if ( data.code == 200 ) {
-                            util.forEach( data.result, function ( item ) {
-                                lineData[(item["_id"].hour + 8) % 24].value = item.count;
-                            } );
-                            var lineChart = chart.lineChart( lineData, "red", detailListBorder.offsetWidth - 400, 200, detailListBorder );
-                            lineChart.svg.classList.add( "line-chart" );
-                            lineChart.svg.css( {
-                                position : "absolute",
-                                top : "50px",
-                                left : "270px"
-                            } );
-
-                            console.log( lineData );
+                            if ( lineChartTimeStamp <= sendStamp ) {
+                                // 如果這個請求是最新的才會更新折綫圖
+                                util.forEach( data.result, function ( item ) {
+                                    lineData[(item["_id"].hour + 8) % 24].value = item.count;
+                                } );
+                                var lineChart = chart.lineChart( lineData, "red", detailListBorder.offsetWidth - 400, 200, detailListBorder );
+                                lineChart.svg.classList.add( "line-chart" );
+                                lineChart.svg.css( {
+                                    position : "absolute",
+                                    top : "50px",
+                                    left : "270px"
+                                } );
+                            }
                         }
                     } );
                 }
