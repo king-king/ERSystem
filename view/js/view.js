@@ -125,7 +125,6 @@
                                         left : "270px"
                                     } );
 
-                                    console.log( lineData );
                                 }
                             } );
                         }
