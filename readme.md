@@ -76,6 +76,7 @@ doc={
      ```
      
 + "/getUnsolvedErrCountInTodayByHours?project=projectName" [get] 得到一个项目在今天每小时错误出现的次数
+##### 返回的数据结构：
     ```javascript
     {
         "code": 200,
@@ -94,6 +95,7 @@ doc={
 
      
 + "/getTheUnsolvedErrCountInTodayByHours?project=projectName'&'err=errName" [get] 得到一个项目中的某个错误在今天每小时错误出现的次数
+##### 返回的数据结构：   
     ```javascript
     {
         "code": 200,
