@@ -237,6 +237,7 @@ MongoClient.connect( dbUrl, function ( err, db ) {
     }
 } );
 
+
 process.on( "exit", function () {
     database && database.close();
 } );
